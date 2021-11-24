@@ -1,12 +1,12 @@
 # EletronicaTAIFF
 
 
-## Projeto TAIFF - Automatização de testes
+## 📢Projeto TAIFF - Automatização de testes
 
 - [x] Código Java
 - [] Código Arduino
 
-## Funcionalidades 
+## ⚙Funcionalidades 
 
 - [x] Integração do Java com o Arduino 
 - [x] Trafego de Informações
