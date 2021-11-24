@@ -14,4 +14,3 @@
 - [x] Comandos para o termopar
 - [ ] Interface funcionando e executando ambos os comandos
 - [ ] Código refatorado 
-- [ ] 
