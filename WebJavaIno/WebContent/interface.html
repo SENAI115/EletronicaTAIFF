@@ -7,65 +7,64 @@
 <title>Interface</title>
 </head>
 <body>
-    <label>Posição X:</label>
-    <input id="xpos" maxlength="3" type="text" />
-    <input id="x" class="posx" type="button" name="btx+" value="+"
-        onclick="crementa('x', this.value)" />
-     <input id="x"  class="posx" type="button" name="btx+" value="+10"
-     onclick="crementa('x', this.value)" />
-    <input id="x" class="posx" type="button" name="btx-" value="-"
-        onclick="crementa('x', this.value)" />
-    <input id="x" class="posx" type="button" name="btx-" value="-10"
-     onclick="crementa('x', this.value)" />
-
-    <br>
-    <br>
-    <label>Posição Y:</label>
-    <input id="ypos" maxlength="3" type="text" />
-    <input type="button" name="bty+" value="+"
-        onclick="crementa('y', this.value)" />
-    <input type="button" name="bty+" value="+10"
-        onclick="crementa('y', this.value)" />
-    <input type="button" name="bty-" value="-"
-        onclick="crementa('y', this.value)" />
-	 <input type="button" name="bty-" value="-10"
-        onclick="crementa('y', this.value)" />
-
-    <br>
-    <br>
-    <label>Posição Z:</label>
-    <input id="zpos" maxlength="3" type="text" />
-    <input type="button" name="btz+" value="+"
-        onclick="crementa('z', this.value)" />
-	<input type="button" name="btz+" value="+10"
-        onclick="crementa('z', this.value)" />
-    <input type="button" name="btz-" value="-"
-        onclick="crementa('z', this.value)" />
-	<input type="button" name="btz-" value="-10"
-        onclick="crementa('z', this.value)" />
-
-    <br>
-    <br>
-    <label>Posição R:</label>
-    <input id="rpos" maxlength="3" type="text" />
-    <input type="button" name="btr+" value="+"
-        onclick="crementa('r', this.value)" />
-	<input type="button" name="btr+" value="+10"
-        onclick="crementa('r', this.value)" />
-    <input type="button" name="btr-" value="-"
-        onclick="crementa('r', this.value)" />
-	 <input type="button" name="btr-" value="-10"
-        onclick="crementa('r', this.value)" />
-<!--     <input id="sr" style='width: 50px;' placeholder="valor: " type="number"
-        value="" /> -->
-    <br>
-    <br>
-    <input type="submit" name="btnGravar" value="Iniciar" onclick="grafico('t')" />
-    <input type="submit" name="btnGravar" value="Parar" onclick="grafico('f')" />
-    <input type="submit" name="btnGravar" value="Gravar Zero Peça" />
-    <input type="submit" name="btnGravar" value="Zero Máquina" onclick="zeroMaquina()" />
-    <br>
-    <br>
-    <script type="text/javascript" src="script/script.js"></script>
+	<label>Posição X:</label>
+	<input id="xpos" class="posx" maxlength="3" type="text" />
+	<input id="x" type="button" class="button" name="btx+" value="+"
+		onclick="crementa('x', this.value)" />
+	<input id="x" type="button" class="button" name="btx+" value="+10"
+		onclick="crementa('x', this.value)" />
+	<input id="x" type="button" class="button" name="btx-" value="-"
+		onclick="crementa('x', this.value)" />
+	<input id="x" type="button" class="button" name="btx-" value="-10"
+		onclick="crementa('x', this.value)" />
+	<br>
+	<br>
+	<label>Posição Y:</label>
+	<input id="ypos" maxlength="3" type="text" />
+	<input type="button" class="button" name="bty+" value="+"
+		onclick="crementa('y', this.value)" />
+	<input type="button" class="button" name="bty+" value="+10"
+		onclick="crementa('y', this.value)" />
+	<input type="button" class="button" name="bty-" value="-"
+		onclick="crementa('y', this.value)" />
+	<input type="button" class="button" name="bty-" value="-10"
+		onclick="crementa('y', this.value)" />
+	<br>
+	<br>
+	<label>Posição Z:</label>
+	<input id="zpos" maxlength="3" type="text" />
+	<input type="button" class="button" name="btz+" value="+"
+		onclick="crementa('z', this.value)" />
+	<input type="button" class="button" name="btz+" value="+10"
+		onclick="crementa('z', this.value)" />
+	<input type="button" class="button" name="btz-" value="-"
+		onclick="crementa('z', this.value)" />
+	<input type="button" class="button" name="btz-" value="-10"
+		onclick="crementa('z', this.value)" />
+	<br>
+	<br>
+	<label>Posição R:</label>
+	<input id="rpos" maxlength="3" type="text" />
+	<input type="button" class="button" name="btr+" value="+"
+		onclick="crementa('r', this.value)" />
+	<input type="button" class="button" name="btr+" value="+10"
+		onclick="crementa('r', this.value)" />
+	<input type="button" class="button" name="btr-" value="-"
+		onclick="crementa('r', this.value)" />
+	<input type="button" class="button" name="btr-" value="-10"
+		onclick="crementa('r', this.value)" />
+	<br>
+	<br>
+	<input type="submit" class="button" name="btnGravar" value="Iniciar" />
+	<input type="submit" class="button" name="btnGravar" value="Parar" />
+	<input type="submit" class="button" name="btnGravar"
+		value="Gravar Zero Peça" onclick="zeraMaquina()" />
+	<input type="submit" class="button" name="btnGravaPosicao"
+		value="Grava Posição" onclick="gravaPosicao()" />
+	<input type="submit" class="button" name="btnRepeteEnsaio"
+		value="Repete Ensaio" onclick="repetirEnsaio()" />
+	<br>
+	<br>
+	<script type="text/javascript" src="script/script.js"></script>
 </body>
 </html>
