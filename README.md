@@ -4,7 +4,7 @@
 ## 📢Projeto TAIFF - Automatização de testes
 
 - [x] Código Java
-- [ ] Código Arduino
+- [x] Código Arduino
 
 ## ⚙Funcionalidades 
 
