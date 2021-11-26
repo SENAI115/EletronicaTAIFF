@@ -36,37 +36,54 @@ public class WebJava extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("Cheguei");
+	//	Posicao pos = new Posicao("-10", "20", "30", "0", 5000); // Receber da Interface WEB.
+//		MovimentarMesa(request.getSession(), pos);
 		
+//		RepetirEnsaio(request, ENSAIOCHUMBADAO());
 		
-		Posicao pos = new Posicao(0, 0, 0, 0, 0); //  Receber da Interface WEB.
+//		ZeraMaquina(request);
 		
-		
-		MovimentarMesa(request.getSession(), pos);
+		LerTemperaturas(request.getSession());
 
+	}
 
+	public String LerTemperaturas(HttpSession session) {
+		
+		Conexao conexaoPorta = (Conexao) session.getAttribute("conexaoPorta");
+		CommInterface inter = new CommInterface();
+		
+		
+		inter.receberTemp(conexaoPorta.entrada, conexaoPorta.saida, conexaoPorta.porta);
+		
+		return "";
 	}
 	
 	public boolean MovimentarMesa(HttpSession session, Posicao posEnsaio) {
-		boolean resp = false;
 		
+		boolean resp = false;
+
 		Conexao conexaoPorta = (Conexao) session.getAttribute("conexaoPorta");
 		CommInterface inter = new CommInterface();
 
 		try {
-
-			inter.enviar(new Gson().toJson(posEnsaio), conexaoPorta.saida, conexaoPorta.porta);
-
-			inter.receber(conexaoPorta.entrada, conexaoPorta.saida, conexaoPorta.porta);
 			
+			String teste = new Gson().toJson(posEnsaio);
+			
+			inter.enviar(new Gson().toJson(posEnsaio), conexaoPorta.saida, conexaoPorta.porta);
+			Thread.sleep(posEnsaio.tempo);
+			System.out.println(teste);
+			//inter.receber(conexaoPorta.entrada, conexaoPorta.saida, conexaoPorta.porta);
+
 			resp = true;
 		} catch (Exception e) {
 			System.out.println("Error Post" + e.getMessage());
 		}
-		
+
 		return resp;
-		
+
 	}
-	
+
 	public String convertString(BufferedReader entrada) {
 		StringBuilder json = new StringBuilder();
 		String linha = "";
@@ -80,35 +97,28 @@ public class WebJava extends HttpServlet {
 		return json.toString();
 	}
 
-	
-	
 	public void RepetirEnsaio(HttpServletRequest request, EnsaioConfig ensaio) {
-
+		System.out.println("Entrei no repetir");
 		for (Posicao pe : ensaio.posicoes) {
 			MovimentarMesa(request.getSession(), pe);
+			
 		}
-		
+
 	}
-	
-	private void zeraMaquina(HttpServletRequest request, Posicao posEnsaio) {
-		posEnsaio.xpos = -1000;
-		posEnsaio.ypos = -1000;
-		posEnsaio.zpos = -1000;
-		posEnsaio.rpos = 0;
+
+	private void ZeraMaquina(HttpServletRequest request) {
 		
-		MovimentarMesa(request.getSession(), posEnsaio);
+		MovimentarMesa(request.getSession(),new Posicao("-1000", "-1000", "-1000", "0", 0));
 	}
-	
-	
+
 	private EnsaioConfig ENSAIOCHUMBADAO() {
 		EnsaioConfig e = new EnsaioConfig();
 		e.nome = "Projeto ABC";
-		e.posicoes.add(new Posicao(500, 250, 100, 0, 60000));
-		e.posicoes.add(new Posicao(500, 250, 200, 0, 5000));
-		e.posicoes.add(new Posicao(500, 250, 200, 0, 5000));
+		e.posicoes.add(new Posicao("500", "250", "100", "0", 6000));
+		e.posicoes.add(new Posicao("5", "0", "0", "0", 5000));
+		e.posicoes.add(new Posicao("-10", "-5", "20", "0", 5000));
 
 		return e;
 	}
 
 }
-

@@ -1,18 +1,24 @@
 package br.senai.sp.model;
 
 public class Posicao {
-
-	public Posicao(int x, int y, int z, int r, int t) {
-		xpos = x;
-		ypos = y;
-		zpos = z;
-		rpos = r;
-		tempo = t;
+	
+	public String xpos ;
+	public String ypos ;
+	public String zpos ;
+	public String rpos ;
+	public int tempo ;
+	
+	public Posicao(String xpos, String ypos, String zpos, String rpos, int tempo) {
+		super();
+		this.xpos = xpos;
+		this.ypos = ypos;
+		this.zpos = zpos;
+		this.rpos = rpos;
+		this.tempo = tempo;
 	}
 
-	public int xpos = 0;
-	public int ypos = 0;
-	public int zpos = 0;
-	public int rpos = 0;
-	public int tempo = 0;
+
+
+
+
 }
