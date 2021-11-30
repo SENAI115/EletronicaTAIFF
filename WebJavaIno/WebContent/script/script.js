@@ -6,6 +6,20 @@ var decisao;
 var memoriaPosicao = [];
 var url = 'http://localhost:8080/WebJavaIno/WebJava';
 // ------------------------------------------------------------------------ //
+
+function pegarValor(posx, posy, posz, posr, tempo){
+	
+	console.log(posx);
+	console.log(posy);
+	console.log(posz);
+	console.log(posr);
+	console.log(tempo);
+
+
+}
+
+
+
 function crementa(valormais, sinal, elemento) {
 
 	document.getElementsByClassName(elemento).disabled = true;

@@ -21,6 +21,24 @@ import br.senai.sp.util.Conexao;
 
 @WebServlet("/WebJava")
 public class WebJava extends HttpServlet {
+	
+	private static int posXatual = 0;
+	private static int posYatual = 0;
+	private static int posZatual = 0;
+	private static int posRatual = 0;
+	
+	private static int posXdestino = 0;
+	private static int posYdestino = 0;
+	private static int posZdestino = 0;
+	private static int posRdestino = 0;
+	
+	private static Integer posXmov = 0;
+	private static Integer posYmov = 0;
+	private static Integer posZmov = 0;
+	private static Integer posRmov = 0;
+	
+	
+
 	private static final long serialVersionUID = 1L;
 
 	private EnsaioConfig ensaio = new EnsaioConfig();
@@ -34,17 +52,48 @@ public class WebJava extends HttpServlet {
 
 	}
 
+	private Integer deslocamento(int destino, int origem) {
+		return  destino - origem;
+	}
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Cheguei");
-	//	Posicao pos = new Posicao("-10", "20", "30", "0", 5000); // Receber da Interface WEB.
-//		MovimentarMesa(request.getSession(), pos);
+
+	
+		posXdestino = 10;
+		posYdestino = -5;
+		posZdestino = 20;
+		posRdestino = 0;
+		
+		
+		Posicao pos = new Posicao(deslocamento(posXdestino,posXatual).toString(),
+				deslocamento(posYdestino,posYatual).toString(),
+				deslocamento(posZdestino,posZatual).toString(),
+				deslocamento(posRdestino,posRatual).toString(), 5000); // Receber da Interface WEB.
+		
+//		System.out.printf("Valor de x: %.2f%n", posXmov);
+//		System.out.printf("FINAL GRADE: %.2f%n",student.finalGrade());
+		System.out.println("Valor de x:"+ posXmov);
+		
+		
+		MovimentarMesa(request.getSession(), pos);
+		
+		posXatual = posXdestino;
+		posYatual = posYdestino;
+		posZatual = posZdestino;
+		posRatual = posRdestino;
+		
+		
+		
+		
+		
 		
 //		RepetirEnsaio(request, ENSAIOCHUMBADAO());
 		
 //		ZeraMaquina(request);
 		
-		LerTemperaturas(request.getSession());
+//		LerTemperaturas(request.getSession());
 
 	}
 
