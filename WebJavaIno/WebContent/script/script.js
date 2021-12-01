@@ -1,3 +1,7 @@
+/**
+ * 
+ */
+
 var xpos = 0;
 var ypos = 0;
 var zpos = 0;
@@ -7,16 +11,26 @@ var memoriaPosicao = [];
 var url = 'http://localhost:8080/WebJavaIno/WebJava';
 // ------------------------------------------------------------------------ //
 
-function pegarValor(posx, posy, posz, posr, tempo){
+
+function pegarValor(){
 	
-	console.log(posx);
-	console.log(posy);
-	console.log(posz);
-	console.log(posr);
-	console.log(tempo);
+	
+	var posx = document.getElementById("#xpos").value;
+	var posx = document.getElementById("#ypos").value;
+	var posx = document.getElementById("#zpos").value;
+	var posx = document.getElementById("#rpos").value;
+	var tempo = document.getElementById("#tempo").value;
+	
+	
+	console.log();
+	console.log();
+	console.log();
+	console.log();
+	console.log();
 
 
 }
+
 
 
 
