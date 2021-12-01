@@ -61,35 +61,36 @@ public class WebJava extends HttpServlet {
 			throws ServletException, IOException {
 
 	
-		posXdestino = 10;
+		posXdestino = -10;
 		posYdestino = -5;
-		posZdestino = 20;
+		posZdestino = -20;
 		posRdestino = 0;
-		
-		
 		Posicao pos = new Posicao(deslocamento(posXdestino,posXatual).toString(),
 				deslocamento(posYdestino,posYatual).toString(),
 				deslocamento(posZdestino,posZatual).toString(),
 				deslocamento(posRdestino,posRatual).toString(), 5000); // Receber da Interface WEB.
-		
-//		System.out.printf("Valor de x: %.2f%n", posXmov);
-//		System.out.printf("FINAL GRADE: %.2f%n",student.finalGrade());
+
 		System.out.println("Valor de x:"+ posXmov);
 		
 		
 		MovimentarMesa(request.getSession(), pos);
-		
 		posXatual = posXdestino;
 		posYatual = posYdestino;
 		posZatual = posZdestino;
 		posRatual = posRdestino;
 		
+		posXdestino = -15;
+		posYdestino = -5;
+		posZdestino = -5;
+		posRdestino = 0;
+		pos = new Posicao(deslocamento(posXdestino,posXatual).toString(),
+				deslocamento(posYdestino,posYatual).toString(),
+				deslocamento(posZdestino,posZatual).toString(),
+				deslocamento(posRdestino,posRatual).toString(), 5000); // Receber da Interface WEB.
 		
+		MovimentarMesa(request.getSession(), pos);
 		
-		
-		
-		
-//		RepetirEnsaio(request, ENSAIOCHUMBADAO());
+	//	RepetirEnsaio(request, ENSAIOCHUMBADAO());
 		
 //		ZeraMaquina(request);
 		
@@ -151,6 +152,12 @@ public class WebJava extends HttpServlet {
 		for (Posicao pe : ensaio.posicoes) {
 			MovimentarMesa(request.getSession(), pe);
 			
+			try {
+				Thread.sleep(pe.tempo);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
 		}
 
 	}
@@ -163,9 +170,18 @@ public class WebJava extends HttpServlet {
 	private EnsaioConfig ENSAIOCHUMBADAO() {
 		EnsaioConfig e = new EnsaioConfig();
 		e.nome = "Projeto ABC";
-		e.posicoes.add(new Posicao("500", "250", "100", "0", 6000));
-		e.posicoes.add(new Posicao("5", "0", "0", "0", 5000));
-		e.posicoes.add(new Posicao("-10", "-5", "20", "0", 5000));
+		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
+		e.posicoes.add(new Posicao("8", "8", "8", "0", 5000));
+		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
+		e.posicoes.add(new Posicao("8", "8", "8", "0", 5000));
+		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
+		e.posicoes.add(new Posicao("8", "8", "8", "0", 5000));
+		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
+		e.posicoes.add(new Posicao("8", "8", "8", "0", 5000));
+		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
+		e.posicoes.add(new Posicao("8", "8", "8", "0", 5000));
+		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
+		
 
 		return e;
 	}

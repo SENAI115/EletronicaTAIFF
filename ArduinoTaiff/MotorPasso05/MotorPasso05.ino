@@ -1,18 +1,18 @@
 // ******** MOTOR DE PASSO *********
 
 // ********** BIBLIOTECAS **********
-#include <ArduinoJson.h>
-#include <max6675.h>
+//#include <ArduinoJson.h>
+//#include <max6675.h>
 
 // *********** CONFIGURAÇÃO PINOS TERMOPARES **************
 #define GPIO_SO       8
 #define GPIO_CS       9
 #define GPIO_CLK      10
  
-MAX6675 termopar01(GPIO_CLK, GPIO_CS, GPIO_SO);
-MAX6675 termopar02(GPIO_CLK, GPIO_CS, GPIO_SO);
-MAX6675 termopar03(GPIO_CLK, GPIO_CS, GPIO_SO);
-MAX6675 termopar04(GPIO_CLK, GPIO_CS, GPIO_SO);
+//  MAX6675 termopar01(GPIO_CLK, GPIO_CS, GPIO_SO);
+//  MAX6675 termopar02(GPIO_CLK, GPIO_CS, GPIO_SO);
+//  MAX6675 termopar03(GPIO_CLK, GPIO_CS, GPIO_SO);
+//  MAX6675 termopar04(GPIO_CLK, GPIO_CS, GPIO_SO);
   
 
 // ********* CONFIGURAÇÕES PINOS DRIVERS MOTORES ***********
@@ -30,7 +30,7 @@ long giro = 0;    // CONTROLE GIRO 1
 int pd = 200;  // CONTROLE VELOCIDADE DOS MOTORES
 int incomingByte = 0; // RECEBE VALOR TEMPERATURA
 
-DynamicJsonDocument recebeJson(1024);
+//DynamicJsonDocument recebeJson(1024);
 char* operacao;
 char* sinal;
 char* eixo;
@@ -45,6 +45,7 @@ String strSinal;
 String strEixo;
 String strPulso;
 String strFlagTermopar;
+int tempo = 100;
 
 int pino1 = 8;
 int pino2 = 9;
@@ -72,25 +73,25 @@ void setup() {
 void loop() {
 
   if (Serial.available() > 0) {
-    deserializeJson(recebeJson, Serial);       // RECEBE JSON DA PORTA USB
-    operacao = recebeJson["operacao"];         // PARÂMETRO QUE DEFINE OPERAÇÃO/FUNÇÃO
-    sinal = recebeJson["sinal"];               // PARÂMETRO QUE DEFINE SINAL/SENTIDO
-    eixo = recebeJson["eixo"];                 // PARÂMETRO QUE DEFINE EIXO
-    pulso = recebeJson["pulso"];               // PARÂMETRO QUE DEFINE PULSOS
-    flagTermopar = recebeJson["flagTermopar"]; // PARÂMETRO QUE ACIONA OS TERMOPARES
+    //deserializeJson(recebeJson, Serial);       // RECEBE JSON DA PORTA USB
+    //operacao = recebeJson["operacao"];         // PARÂMETRO QUE DEFINE OPERAÇÃO/FUNÇÃO
+    //sinal = recebeJson["sinal"];               // PARÂMETRO QUE DEFINE SINAL/SENTIDO
+    //eixo = recebeJson["eixo"];                 // PARÂMETRO QUE DEFINE EIXO
+    //pulso = recebeJson["pulso"];               // PARÂMETRO QUE DEFINE PULSOS
+    //flagTermopar = recebeJson["flagTermopar"]; // PARÂMETRO QUE ACIONA OS TERMOPARES
     strOperacao = String(operacao);
     strSinal = String(sinal);
     strEixo = String(eixo);
     strPulso = String(pulso);
     strFlagTermopar = String(flagTermopar);
 
-    giroMotor('x', strSinal, strPulso);
-    giroMotor('y', strSinal, strPulso);
-    giroMotor('z', strSinal, strPulso);
-    giroMotor('r', strSinal, strPulso);
+    giroMotor("x", strSinal, strPulso);
+    giroMotor("y", strSinal, strPulso);
+    giroMotor("z", strSinal, strPulso);
+    giroMotor("r", strSinal, strPulso);
     
 
-    sleep(tempo);
+    //sleep(tempo);
 
     // ------------------------------- //
 
@@ -199,11 +200,11 @@ void definiPulsos(String strPulso) {
 
 // *********** FUNÇÃO TERMOPARES *************
 
-
+/*
 void funcaoTermopares(String strFlagTermopar) {
-  int temp01 = termopar01.read();
-  int temp02 = termopar02.read();
-  int temp03 = termopar03.read();
-  int temp04 = termopar04.read();
-  
+  int temp01 = termopar01.readCelsius();
+  int temp02 = termopar02.readCelsius();
+  int temp03 = termopar03.readCelsius();
+  int temp04 = termopar04.readCelsius();  
 }
+*/
