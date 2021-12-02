@@ -12,27 +12,53 @@ var url = 'http://localhost:8080/WebJavaIno/WebJava';
 // ------------------------------------------------------------------------ //
 
 
-function pegarValor(){
+function enviar(){
+	
+	var posx = document.getElementById("xpos").value;
+	var posy = document.getElementById("ypos").value;
+	var posz = document.getElementById("zpos").value;
+	var posr = document.getElementById("rpos").value;
+	var tempo = document.getElementById("tempo").value;
 	
 	
-	var posx = document.getElementById("#xpos").value;
-	var posx = document.getElementById("#ypos").value;
-	var posx = document.getElementById("#zpos").value;
-	var posx = document.getElementById("#rpos").value;
-	var tempo = document.getElementById("#tempo").value;
-	
-	
-	console.log();
-	console.log();
-	console.log();
-	console.log();
-	console.log();
+	console.log(posx);
+	console.log(posy);
+	console.log(posz);
+	console.log(posr);
+	console.log(tempo);
 
+	send(posx, posy, posz, posr, tempo);
+	
+	let btns = document.getElementsByClassName("button");
+
+	for (let i = 0; i < btns.length; i++) { btns[i].disabled = true }
+	setTimeout(() => { for (let i = 0; i < btns.length; i++) { btns[i].disabled = false } }, 3000);
 
 }
 
+function construtor(){
+	
+	fetch(url, {
+		method: 'GET'
+	})
+		.then(function(data) {
+			console.log('Request success: ', data);
+		})
+		.catch(function(error) {
+			console.log('Request failure: ', error);
+		});
+		
+		removeConstrutor()
+		
+		alert("Conectado com o Arduino!!!");
 
+}
 
+function removeConstrutor() {
+    var elem = document.getElementById('construtor-do-bitt');
+    elem.parentNode.removeChild(elem);
+    return false;
+}
 
 function crementa(valormais, sinal, elemento) {
 
@@ -77,16 +103,20 @@ function crementa(valormais, sinal, elemento) {
 
 
 // -----------------------------------------
-function send(valor, eixo, sinal) {
+
+function send(posx, posy, posz, posr, tempo) {
+
 	let controller = new AbortController();
 	setTimeout(() => controller.abort(), 100);
 	fetch(url, {
 		signal: controller.signal,
 		method: 'POST',
 		body: JSON.stringify({
-			eixo: eixo,
-			operacao: valor,
-			sinal: sinal
+			xpos:posx,
+			ypos:posy,
+			zpos:posz,
+			rpos:posr,
+			tempo: tempo
 		})
 	})
 		.then(function(data) {

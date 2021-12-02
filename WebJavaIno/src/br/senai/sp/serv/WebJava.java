@@ -60,24 +60,52 @@ public class WebJava extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-	
-		posXdestino = 10;
-		posYdestino = -5;
-		posZdestino = 20;
-		posRdestino = 0;
+		StringBuilder builder = new StringBuilder();
+		
+		BufferedReader reader = request.getReader();
+		
+		 String line;
+		    while ((line = reader.readLine()) != null) {
+		    	builder.append(line);
+		    	
+		    }
+		    String data = builder.toString();	
+		    
 		
 		
-		Posicao pos = new Posicao(deslocamento(posXdestino,posXatual).toString(),
+		System.out.println(data);
+
+		Gson gson = new Gson();
+		
+		Posicao pos = gson.fromJson(data,Posicao.class);
+		
+//		System.out.println(pos.xpos);
+//		System.out.println(pos.ypos);
+//		System.out.println(pos.zpos);
+//		System.out.println(pos.rpos);
+//		System.out.println(pos.tempo);
+		
+		
+		posXdestino = Integer.valueOf(pos.xpos);
+		posYdestino = Integer.valueOf(pos.ypos);
+		posZdestino = Integer.valueOf(pos.zpos);
+		posRdestino = Integer.valueOf(pos.rpos);
+		
+		
+		Posicao posi = new Posicao(deslocamento(posXdestino,posXatual).toString(),
 				deslocamento(posYdestino,posYatual).toString(),
 				deslocamento(posZdestino,posZatual).toString(),
-				deslocamento(posRdestino,posRatual).toString(), 5000); // Receber da Interface WEB.
+				deslocamento(posRdestino,posRatual).toString(), pos.tempo); // Receber da Interface WEB.
+		
+
+	
 		
 //		System.out.printf("Valor de x: %.2f%n", posXmov);
 //		System.out.printf("FINAL GRADE: %.2f%n",student.finalGrade());
-		System.out.println("Valor de x:"+ posXmov);
+//		System.out.println("Valor de x:"+ posXmov);
 		
 		
-		MovimentarMesa(request.getSession(), pos);
+	
 		
 		posXatual = posXdestino;
 		posYatual = posYdestino;
@@ -85,7 +113,10 @@ public class WebJava extends HttpServlet {
 		posRatual = posRdestino;
 		
 		
+		System.out.println("destino: "+posXdestino);
+		System.out.println("atual: "+posXatual);
 		
+		MovimentarMesa(request.getSession(), posi);
 		
 		
 		
@@ -121,8 +152,8 @@ public class WebJava extends HttpServlet {
 			
 			inter.enviar(new Gson().toJson(posEnsaio), conexaoPorta.saida, conexaoPorta.porta);
 			Thread.sleep(posEnsaio.tempo);
-			System.out.println(teste);
-			//inter.receber(conexaoPorta.entrada, conexaoPorta.saida, conexaoPorta.porta);
+//			System.out.println(teste);
+			inter.receber(conexaoPorta.entrada, conexaoPorta.saida, conexaoPorta.porta);
 
 			resp = true;
 		} catch (Exception e) {

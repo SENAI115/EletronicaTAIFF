@@ -8,6 +8,12 @@ public class Posicao {
 	public String rpos ;
 	public int tempo ;
 	
+	
+	
+	public Posicao() {
+	
+	}
+
 	public Posicao(String xpos, String ypos, String zpos, String rpos, int tempo) {
 		super();
 		this.xpos = xpos;
