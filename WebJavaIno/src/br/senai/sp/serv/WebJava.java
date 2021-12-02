@@ -60,6 +60,7 @@ public class WebJava extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+<<<<<<< HEAD
 		StringBuilder builder = new StringBuilder();
 		
 		BufferedReader reader = request.getReader();
@@ -107,12 +108,37 @@ public class WebJava extends HttpServlet {
 		
 	
 		
+=======
+	
+		posXdestino = -10;
+		posYdestino = -5;
+		posZdestino = -20;
+		posRdestino = 0;
+		Posicao pos = new Posicao(deslocamento(posXdestino,posXatual).toString(),
+				deslocamento(posYdestino,posYatual).toString(),
+				deslocamento(posZdestino,posZatual).toString(),
+				deslocamento(posRdestino,posRatual).toString(), 5000); // Receber da Interface WEB.
+
+		System.out.println("Valor de x:"+ posXmov);
+		
+		
+		MovimentarMesa(request.getSession(), pos);
+>>>>>>> 9c04392a83e3429740d46c149d2722dde4b256ab
 		posXatual = posXdestino;
 		posYatual = posYdestino;
 		posZatual = posZdestino;
 		posRatual = posRdestino;
 		
+		posXdestino = -15;
+		posYdestino = -5;
+		posZdestino = -5;
+		posRdestino = 0;
+		pos = new Posicao(deslocamento(posXdestino,posXatual).toString(),
+				deslocamento(posYdestino,posYatual).toString(),
+				deslocamento(posZdestino,posZatual).toString(),
+				deslocamento(posRdestino,posRatual).toString(), 5000); // Receber da Interface WEB.
 		
+<<<<<<< HEAD
 		System.out.println("destino: "+posXdestino);
 		System.out.println("atual: "+posXatual);
 		
@@ -121,6 +147,11 @@ public class WebJava extends HttpServlet {
 		
 		
 //		RepetirEnsaio(request, ENSAIOCHUMBADAO());
+=======
+		MovimentarMesa(request.getSession(), pos);
+		
+	//	RepetirEnsaio(request, ENSAIOCHUMBADAO());
+>>>>>>> 9c04392a83e3429740d46c149d2722dde4b256ab
 		
 //		ZeraMaquina(request);
 		
@@ -182,6 +213,12 @@ public class WebJava extends HttpServlet {
 		for (Posicao pe : ensaio.posicoes) {
 			MovimentarMesa(request.getSession(), pe);
 			
+			try {
+				Thread.sleep(pe.tempo);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
 		}
 
 	}
@@ -194,9 +231,18 @@ public class WebJava extends HttpServlet {
 	private EnsaioConfig ENSAIOCHUMBADAO() {
 		EnsaioConfig e = new EnsaioConfig();
 		e.nome = "Projeto ABC";
-		e.posicoes.add(new Posicao("500", "250", "100", "0", 6000));
-		e.posicoes.add(new Posicao("5", "0", "0", "0", 5000));
-		e.posicoes.add(new Posicao("-10", "-5", "20", "0", 5000));
+		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
+		e.posicoes.add(new Posicao("8", "8", "8", "0", 5000));
+		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
+		e.posicoes.add(new Posicao("8", "8", "8", "0", 5000));
+		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
+		e.posicoes.add(new Posicao("8", "8", "8", "0", 5000));
+		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
+		e.posicoes.add(new Posicao("8", "8", "8", "0", 5000));
+		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
+		e.posicoes.add(new Posicao("8", "8", "8", "0", 5000));
+		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
+		
 
 		return e;
 	}
