@@ -21,23 +21,21 @@ import br.senai.sp.util.Conexao;
 
 @WebServlet("/WebJava")
 public class WebJava extends HttpServlet {
-	
+
 	private static int posXatual = 0;
 	private static int posYatual = 0;
 	private static int posZatual = 0;
 	private static int posRatual = 0;
-	
+
 	private static int posXdestino = 0;
 	private static int posYdestino = 0;
 	private static int posZdestino = 0;
 	private static int posRdestino = 0;
-	
+
 	private static Integer posXmov = 0;
 	private static Integer posYmov = 0;
 	private static Integer posZmov = 0;
 	private static Integer posRmov = 0;
-	
-	
 
 	private static final long serialVersionUID = 1L;
 
@@ -53,157 +51,85 @@ public class WebJava extends HttpServlet {
 	}
 
 	private Integer deslocamento(int destino, int origem) {
-		return  destino - origem;
+		return destino - origem;
 	}
-	
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 		StringBuilder builder = new StringBuilder();
-		
+
 		BufferedReader reader = request.getReader();
-		
-		 String line;
-		    while ((line = reader.readLine()) != null) {
-		    	builder.append(line);
-		    	
-		    }
-		    String data = builder.toString();	
-		    
-		
-		
+
+		String line;
+		while ((line = reader.readLine()) != null) {
+			builder.append(line);
+
+		}
+		String data = builder.toString();
+
 		System.out.println(data);
 
 		Gson gson = new Gson();
-		
-		Posicao pos = gson.fromJson(data,Posicao.class);
-		
-//		System.out.println(pos.xpos);
-//		System.out.println(pos.ypos);
-//		System.out.println(pos.zpos);
-//		System.out.println(pos.rpos);
-//		System.out.println(pos.tempo);
-		
-		
+		Posicao pos = gson.fromJson(data, Posicao.class);
+
 		posXdestino = Integer.valueOf(pos.xpos);
 		posYdestino = Integer.valueOf(pos.ypos);
 		posZdestino = Integer.valueOf(pos.zpos);
 		posRdestino = Integer.valueOf(pos.rpos);
-		
-		
-		Posicao posi = new Posicao(deslocamento(posXdestino,posXatual).toString(),
-				deslocamento(posYdestino,posYatual).toString(),
-				deslocamento(posZdestino,posZatual).toString(),
-				deslocamento(posRdestino,posRatual).toString(), pos.tempo); // Receber da Interface WEB.
-		
 
-	
-		
-//		System.out.printf("Valor de x: %.2f%n", posXmov);
-//		System.out.printf("FINAL GRADE: %.2f%n",student.finalGrade());
-//		System.out.println("Valor de x:"+ posXmov);
-		
-		
-	
-		
-=======
-	
-		posXdestino = -10;
-		posYdestino = -5;
-		posZdestino = -20;
-		posRdestino = 0;
-		Posicao pos = new Posicao(deslocamento(posXdestino,posXatual).toString(),
-				deslocamento(posYdestino,posYatual).toString(),
-				deslocamento(posZdestino,posZatual).toString(),
-=======
-	
-		posXdestino = -10;
-		posYdestino = -5;
-		posZdestino = -20;
-		posRdestino = 0;
-		Posicao pos = new Posicao(deslocamento(posXdestino,posXatual).toString(),
-				deslocamento(posYdestino,posYatual).toString(),
-				deslocamento(posZdestino,posZatual).toString(),
->>>>>>> 9c04392a83e3429740d46c149d2722dde4b256ab
-				deslocamento(posRdestino,posRatual).toString(), 5000); // Receber da Interface WEB.
+		Posicao posi = new Posicao(deslocamento(posXdestino, posXatual).toString(),
+				deslocamento(posYdestino, posYatual).toString(), deslocamento(posZdestino, posZatual).toString(),
+				deslocamento(posRdestino, posRatual).toString(), pos.tempo); // Receber da Interface WEB.
 
-		System.out.println("Valor de x:"+ posXmov);
-		
-		
-		MovimentarMesa(request.getSession(), pos);
-<<<<<<< HEAD
->>>>>>> 9c04392a83e3429740d46c149d2722dde4b256ab
-=======
->>>>>>> 9c04392a83e3429740d46c149d2722dde4b256ab
+
 		posXatual = posXdestino;
 		posYatual = posYdestino;
 		posZatual = posZdestino;
 		posRatual = posRdestino;
-		
-		posXdestino = -15;
-		posYdestino = -5;
-		posZdestino = -5;
-		posRdestino = 0;
-		pos = new Posicao(deslocamento(posXdestino,posXatual).toString(),
-				deslocamento(posYdestino,posYatual).toString(),
-				deslocamento(posZdestino,posZatual).toString(),
-				deslocamento(posRdestino,posRatual).toString(), 5000); // Receber da Interface WEB.
-		
-<<<<<<< HEAD
-<<<<<<< HEAD
-		System.out.println("destino: "+posXdestino);
-		System.out.println("atual: "+posXatual);
-		
+
+		System.out.println("destino: " + posXdestino);
+		System.out.println("atual: " + posXatual);
+
 		MovimentarMesa(request.getSession(), posi);
-		
-		
-		
+
 //		RepetirEnsaio(request, ENSAIOCHUMBADAO());
-=======
-		MovimentarMesa(request.getSession(), pos);
-		
-	//	RepetirEnsaio(request, ENSAIOCHUMBADAO());
->>>>>>> 9c04392a83e3429740d46c149d2722dde4b256ab
-=======
-		MovimentarMesa(request.getSession(), pos);
-		
-	//	RepetirEnsaio(request, ENSAIOCHUMBADAO());
->>>>>>> 9c04392a83e3429740d46c149d2722dde4b256ab
-		
+
+
+		// RepetirEnsaio(request, ENSAIOCHUMBADAO());
+
 //		ZeraMaquina(request);
-		
+
 //		LerTemperaturas(request.getSession());
 
 	}
 
 	public String LerTemperaturas(HttpSession session) {
-		
+
 		Conexao conexaoPorta = (Conexao) session.getAttribute("conexaoPorta");
 		CommInterface inter = new CommInterface();
+
+		inter.receber(conexaoPorta.entrada, conexaoPorta.saida, conexaoPorta.porta);
 		
-		
-		inter.receberTemp(conexaoPorta.entrada, conexaoPorta.saida, conexaoPorta.porta);
-		
+//		inter.receberTemp(conexaoPorta.entrada, conexaoPorta.saida, conexaoPorta.porta);
+
 		return "";
 	}
-	
+
 	public boolean MovimentarMesa(HttpSession session, Posicao posEnsaio) {
-		
+
 		boolean resp = false;
 
 		Conexao conexaoPorta = (Conexao) session.getAttribute("conexaoPorta");
 		CommInterface inter = new CommInterface();
 
 		try {
-			
+
 			String teste = new Gson().toJson(posEnsaio);
-			
-			inter.enviar(new Gson().toJson(posEnsaio), conexaoPorta.saida, conexaoPorta.porta);
+			System.out.println("MovimentarMesa");
+			inter.enviar(teste, conexaoPorta.saida, conexaoPorta.porta);
 			Thread.sleep(posEnsaio.tempo);
-//			System.out.println(teste);
+			System.out.println(teste);
 			inter.receber(conexaoPorta.entrada, conexaoPorta.saida, conexaoPorta.porta);
 
 			resp = true;
@@ -232,20 +158,20 @@ public class WebJava extends HttpServlet {
 		System.out.println("Entrei no repetir");
 		for (Posicao pe : ensaio.posicoes) {
 			MovimentarMesa(request.getSession(), pe);
-			
+
 			try {
 				Thread.sleep(pe.tempo);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+
 		}
 
 	}
 
 	private void ZeraMaquina(HttpServletRequest request) {
-		
-		MovimentarMesa(request.getSession(),new Posicao("-1000", "-1000", "-1000", "0", 0));
+
+		MovimentarMesa(request.getSession(), new Posicao("-1000", "-1000", "-1000", "0", 0));
 	}
 
 	private EnsaioConfig ENSAIOCHUMBADAO() {
@@ -254,15 +180,6 @@ public class WebJava extends HttpServlet {
 		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
 		e.posicoes.add(new Posicao("8", "8", "8", "0", 5000));
 		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
-		e.posicoes.add(new Posicao("8", "8", "8", "0", 5000));
-		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
-		e.posicoes.add(new Posicao("8", "8", "8", "0", 5000));
-		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
-		e.posicoes.add(new Posicao("8", "8", "8", "0", 5000));
-		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
-		e.posicoes.add(new Posicao("8", "8", "8", "0", 5000));
-		e.posicoes.add(new Posicao("-8", "-8", "-8", "0", 5000));
-		
 
 		return e;
 	}

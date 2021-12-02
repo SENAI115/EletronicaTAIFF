@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 
 import com.fazecast.jSerialComm.SerialPort;
 
+
+
 public class CommInterface {
 
 	public void enviar(String status, PrintWriter saida, SerialPort porta) throws Exception {
@@ -14,8 +16,9 @@ public class CommInterface {
 		saida.flush();
 	}
 
-	public void receber(BufferedReader entrada, PrintWriter saida, SerialPort porta) {
+	public void receber(BufferedReader entrada, PrintWriter saida , SerialPort porta) {
 
+		System.out.println("receber");
 		try {
 			String linha = "";
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");

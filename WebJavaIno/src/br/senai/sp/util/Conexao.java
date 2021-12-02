@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 
 import com.fazecast.jSerialComm.SerialPort;
 
+
+
 public class Conexao {
 
 	public static PrintWriter saida;
