@@ -61,6 +61,7 @@ public class WebJava extends HttpServlet {
 			throws ServletException, IOException {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		StringBuilder builder = new StringBuilder();
 		
 		BufferedReader reader = request.getReader();
@@ -117,12 +118,25 @@ public class WebJava extends HttpServlet {
 		Posicao pos = new Posicao(deslocamento(posXdestino,posXatual).toString(),
 				deslocamento(posYdestino,posYatual).toString(),
 				deslocamento(posZdestino,posZatual).toString(),
+=======
+	
+		posXdestino = -10;
+		posYdestino = -5;
+		posZdestino = -20;
+		posRdestino = 0;
+		Posicao pos = new Posicao(deslocamento(posXdestino,posXatual).toString(),
+				deslocamento(posYdestino,posYatual).toString(),
+				deslocamento(posZdestino,posZatual).toString(),
+>>>>>>> 9c04392a83e3429740d46c149d2722dde4b256ab
 				deslocamento(posRdestino,posRatual).toString(), 5000); // Receber da Interface WEB.
 
 		System.out.println("Valor de x:"+ posXmov);
 		
 		
 		MovimentarMesa(request.getSession(), pos);
+<<<<<<< HEAD
+>>>>>>> 9c04392a83e3429740d46c149d2722dde4b256ab
+=======
 >>>>>>> 9c04392a83e3429740d46c149d2722dde4b256ab
 		posXatual = posXdestino;
 		posYatual = posYdestino;
@@ -139,6 +153,7 @@ public class WebJava extends HttpServlet {
 				deslocamento(posRdestino,posRatual).toString(), 5000); // Receber da Interface WEB.
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		System.out.println("destino: "+posXdestino);
 		System.out.println("atual: "+posXatual);
 		
@@ -147,6 +162,11 @@ public class WebJava extends HttpServlet {
 		
 		
 //		RepetirEnsaio(request, ENSAIOCHUMBADAO());
+=======
+		MovimentarMesa(request.getSession(), pos);
+		
+	//	RepetirEnsaio(request, ENSAIOCHUMBADAO());
+>>>>>>> 9c04392a83e3429740d46c149d2722dde4b256ab
 =======
 		MovimentarMesa(request.getSession(), pos);
 		
