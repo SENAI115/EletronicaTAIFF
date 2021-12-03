@@ -1,4 +1,4 @@
-// ******** MOTOR DE PASSO *********
+// ******** TAIFF - ELETRÔNICA *********
 
 // ********** BIBLIOTECAS **********
 #include <ArduinoJson.h>
@@ -31,48 +31,33 @@ int pd = 200;  // CONTROLE VELOCIDADE DOS MOTORES
 int incomingByte = 0; // RECEBE VALOR TEMPERATURA
 
 DynamicJsonDocument recebeJson(1024);
-char* operacao;
-char* sinal;
-char* eixo;
-char* pulso;
-char* flagTermopar;
-String dado;
+char* charOperacao;
+char* charSinal;
+char* charEixo;
+String operacao = "";
+String sinal = "";
+String eixo = "";
+int pulso;
+String flagTermopar = "";
+String dado = "";
 boolean sentido;
-int pos;
-String pul;
-String strOperacao;
-String strSinal;
-String strEixo;
-String strPulso;
-String strFlagTermopar;
+int pos = 0;
+String pul = "";
 
 int pino1 = 8;
 int pino2 = 9;
 int pino3 = 10;
-int pinMode1 = 13;
+int pinMode1 = 13; // ???
+int pinZeraX = HIGH;
+int pinZeraY = HIGH;
+int pinZeraZ = HIGH;
 
-int pinZeraX;
-int pinZeraY;
-int pinZeraZ;
-
-
-// Variaveis das posições
-
-
-char* posX;
-char* posY;
-char* posZ;
-char* posR;
+int posX;
+int posY;
+int posZ;
+int posR;
 int tempo;
-
-String strPosX;
-String strPosY;
-String strPosZ;
-String strPosR;
-int intTempo;
-
-
-int sensorPin = 0;
+int sensorPin = 0; // ???
 int lightlevel;
 
 // ******** SETUP ********
@@ -93,57 +78,50 @@ void setup() {
 // ********* LOOP **********
 void loop() {
 
-  //    digitalWrite(pinMode1, HIGH);
-  //    delay(3000);
-  //    digitalWrite(pinMode1, LOW);
-  if (Serial.available() > 0) {
-    deserializeJson(recebeJson, Serial);       // RECEBE JSON DA PORTA USB
-
-    //Serial.println("Temperatura");
-    //delay(1000);
-    //funcaoTermopares();
-    
-        posX = recebeJson["xpos"];
-        posY = recebeJson["ypos"];
-        posZ = recebeJson["zpos"];
-        posR = recebeJson["rpos"];
-        tempo = recebeJson["tempo"];
-
-        strPosX = String(posX);
-        strPosY = String(posY);
-        strPosZ = String(posZ);
-        strPosR = String(posR);
-        intTempo = (int)tempo;
-
-        delay(1000);
-        Serial.println(strPosX);
-        Serial.println(strPosY);
-        Serial.println(strPosZ);
-        Serial.println(strPosR);
-        Serial.println(tempo);
-
-        
-    //
-//        giroMotor2("x", strPosX);
-//        giroMotor2("y", strPosY);
-//        giroMotor2("z", strPosZ);
-//        giroMotor2("r", strPosR);
-    //
+  if (Serial.available()) {
+    trataJson();
   }
 
+  if (operacao.equals("mov"))
+    giroMotor(eixo, sinal, pulso);
+  if (operacao.equals("zeroMaquina"))
+    zeroMaquina();
+  if (operacao.equals("termopar"))
+    funcaoTermopares();
+  //if (operacao.equals("movPosicao"))
+    
+  }
+
+// ********* FUNÇÃO TRATA JSON **********
+void trataJson() { // FUNÇÃO PARA DESERIALIZAR OS ATRIBUTOS DO JSON
+
+  deserializeJson(recebeJson, Serial);       // RECEBE JSON DA PORTA USB
+  charOperacao = recebeJson["operacao"];
+  operacao = String(charOperacao);
+  charSinal = recebeJson["sinal"];
+  sinal = String(charSinal);
+  charEixo = recebeJson["eixo"];
+  eixo = String(charEixo);
+  pulso = recebeJson["pulso"];
+  posX = recebeJson["xpos"];
+  posY = recebeJson["ypos"];
+  posZ = recebeJson["zpos"];
+  posR = recebeJson["rpos"];
+  tempo = recebeJson["tempo"];
+  
 }
 
 // ********* FUNÇÃO GIRO MOTOR MANUAL **********
-void giroMotor(String strEixo, String strSinal, String strPulso) {
+void giroMotor(String eixo, String sinal, int pulso) {
 
-  if (strSinal.equals("+")) { // DEFINIÇÃO DO SENTIDO DO DESLOCAMENTO
+  if (sinal.equals("+")) { // DEFINIÇÃO DO SENTIDO DO DESLOCAMENTO
     sentido = HIGH;
   } else {
     sentido = LOW;
   }
 
   definiDrivers(eixo); // DEFININDO DRIVERS
-  definiPulsos(strPulso); // DEFININDO PULSOS
+  definiPulsos(pulso); // DEFININDO PULSOS
   digitalWrite(driverDIR, sentido);  // SET DOS PINOS DE COMUNICAÇÃO COM O DRIVER
   for (giro; giro <= pos; giro++) {  // LAÇO QUE MOVIMENTA OS MOTORES
     digitalWrite(driverPUL, HIGH);
@@ -175,7 +153,7 @@ void giroMotor2(String strEixo, String strPulso) {
   }
 
   definiDrivers(strEixo); // DEFININDO DRIVERS
-  definiPulsos(strPulso); // DEFININDO PULSOS
+  definiPulsos(pulso); // DEFININDO PULSOS
   digitalWrite(driverDIR, sentido);  // SET DOS PINOS DE COMUNICAÇÃO COM O DRIVER
   for (giro; giro <= pos; giro++) {  // LAÇO QUE MOVIMENTA OS MOTORES
     digitalWrite(driverPUL, HIGH);
@@ -185,9 +163,9 @@ void giroMotor2(String strEixo, String strPulso) {
   }
   giro = 0;
   pos = 0;
-  strEixo = "";
-  strPulso = "";
-  
+  eixo = "";
+  pulso = 0;
+
 }
 
 //-----------------------
@@ -253,8 +231,8 @@ void definiDrivers(String eixo) {
 }
 
 // ******** FUNÇÃO DEFINIÇÃO DOS PULSOS ********
-void definiPulsos(String strPulso) {
-  pos = 440 * abs(strPulso.toInt());
+void definiPulsos(int pulso) { // DESLOCAMENTO DE 0,1cm
+  pos = 88 * abs(pulso);
 }
 
 // *********** FUNÇÃO TERMOPARES *************
