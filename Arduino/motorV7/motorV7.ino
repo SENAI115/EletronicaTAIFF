@@ -88,9 +88,17 @@ void loop() {
     zeroMaquina();
   if (operacao.equals("termopar"))
     funcaoTermopares();
-  //if (operacao.equals("movPosicao"))
-    
-  }
+  if (operacao.equals("movPosicao"))
+    motorPosicao();
+  if (operacao.equals("zeroPeca"))
+    zeroPeca();
+}
+
+// ********* FUNÇÃO ZERO PEÇA **********
+void zeroPeca(int posx, int posy, int posz) {
+  zeroMaquina();
+  posicaoMotor(posx, posy, posz);
+}
 
 // ********* FUNÇÃO TRATA JSON **********
 void trataJson() { // FUNÇÃO PARA DESERIALIZAR OS ATRIBUTOS DO JSON
@@ -108,7 +116,7 @@ void trataJson() { // FUNÇÃO PARA DESERIALIZAR OS ATRIBUTOS DO JSON
   posZ = recebeJson["zpos"];
   posR = recebeJson["rpos"];
   tempo = recebeJson["tempo"];
-  
+
 }
 
 // ********* FUNÇÃO GIRO MOTOR MANUAL **********

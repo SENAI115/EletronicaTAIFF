@@ -57,6 +57,7 @@ public class WebJava extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		
 		StringBuilder builder = new StringBuilder();
 
 		BufferedReader reader = request.getReader();
@@ -71,15 +72,20 @@ public class WebJava extends HttpServlet {
 		System.out.println(data);
 
 		Gson gson = new Gson();
+		
+		/*
 		Posicao pos = gson.fromJson(data, Posicao.class);
+		
 
 		posXdestino = Integer.valueOf(pos.xpos);
 		posYdestino = Integer.valueOf(pos.ypos);
 		posZdestino = Integer.valueOf(pos.zpos);
 		posRdestino = Integer.valueOf(pos.rpos);
 
-		Posicao posi = new Posicao(deslocamento(posXdestino, posXatual).toString(),
-				deslocamento(posYdestino, posYatual).toString(), deslocamento(posZdestino, posZatual).toString(),
+		Posicao posi = new Posicao(
+				deslocamento(posXdestino, posXatual).toString(),
+				deslocamento(posYdestino, posYatual).toString(), 
+				deslocamento(posZdestino, posZatual).toString(),
 				deslocamento(posRdestino, posRatual).toString(), pos.tempo); // Receber da Interface WEB.
 
 
@@ -91,14 +97,14 @@ public class WebJava extends HttpServlet {
 		System.out.println("destino: " + posXdestino);
 		System.out.println("atual: " + posXatual);
 
-		MovimentarMesa(request.getSession(), posi);
-
+		MovimentarMesa(request.getSession(), pos);
+		*/
 //		RepetirEnsaio(request, ENSAIOCHUMBADAO());
 
 
 		// RepetirEnsaio(request, ENSAIOCHUMBADAO());
 
-//		ZeraMaquina(request);
+		//ZeraMaquina(request);
 
 //		LerTemperaturas(request.getSession());
 
@@ -171,7 +177,7 @@ public class WebJava extends HttpServlet {
 
 	private void ZeraMaquina(HttpServletRequest request) {
 
-		MovimentarMesa(request.getSession(), new Posicao("-1000", "-1000", "-1000", "0", 0));
+		MovimentarMesa(request.getSession(), new Posicao("9", "9", "9", "0", 0));
 	}
 
 	private EnsaioConfig ENSAIOCHUMBADAO() {

@@ -12,15 +12,15 @@ var url = 'http://localhost:8080/WebJavaIno/WebJava';
 // ------------------------------------------------------------------------ //
 
 
-function enviar(){
-	
+function enviar() {
+
 	var posx = document.getElementById("xpos").value;
 	var posy = document.getElementById("ypos").value;
 	var posz = document.getElementById("zpos").value;
 	var posr = document.getElementById("rpos").value;
 	var tempo = document.getElementById("tempo").value;
-	
-	
+
+
 	console.log(posx);
 	console.log(posy);
 	console.log(posz);
@@ -28,7 +28,7 @@ function enviar(){
 	console.log(tempo);
 
 	send(posx, posy, posz, posr, tempo);
-	
+
 	let btns = document.getElementsByClassName("button");
 
 	for (let i = 0; i < btns.length; i++) { btns[i].disabled = true }
@@ -36,8 +36,8 @@ function enviar(){
 
 }
 
-function construtor(){
-	
+function construtor() {
+
 	fetch(url, {
 		method: 'GET'
 	})
@@ -47,17 +47,17 @@ function construtor(){
 		.catch(function(error) {
 			console.log('Request failure: ', error);
 		});
-		
-		removeConstrutor()
-		
-		alert("Conectado com o Arduino!!!");
+
+	removeConstrutor();
+
+	alert("Conectado com o Arduino!!!");
 
 }
 
 function removeConstrutor() {
-    var elem = document.getElementById('construtor-do-bitt');
-    elem.parentNode.removeChild(elem);
-    return false;
+	var elem = document.getElementById('construtor-do-bitt');
+	elem.parentNode.removeChild(elem);
+	return false;
 }
 
 function crementa(valormais, sinal, elemento) {
@@ -112,10 +112,10 @@ function send(posx, posy, posz, posr, tempo) {
 		signal: controller.signal,
 		method: 'POST',
 		body: JSON.stringify({
-			xpos:posx,
-			ypos:posy,
-			zpos:posz,
-			rpos:posr,
+			xpos: posx,
+			ypos: posy,
+			zpos: posz,
+			rpos: posr,
 			tempo: tempo
 		})
 	})
