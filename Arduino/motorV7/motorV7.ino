@@ -47,6 +47,32 @@ String pul = "";
 int pino1 = 8;
 int pino2 = 9;
 int pino3 = 10;
+<<<<<<< HEAD
+int pinMode1 = 13;
+
+int pinZeraX;
+int pinZeraY;
+int pinZeraZ;
+
+
+// Variaveis das posições
+
+
+float posX;
+float posY;
+float posZ;
+float posR;
+float tempo;
+
+String strPosX;
+String strPosY;
+String strPosZ;
+String strPosR;
+int intTempo;
+
+
+int sensorPin = 0;
+=======
 int pinMode1 = 13; // ???
 int pinZeraX = HIGH;
 int pinZeraY = HIGH;
@@ -58,6 +84,7 @@ int posZ;
 int posR;
 int tempo;
 int sensorPin = 0; // ???
+>>>>>>> 5dc3acd78a2722c06000000609f3e2292e2d63ab
 int lightlevel;
 
 // ******** SETUP ********
@@ -78,8 +105,47 @@ void setup() {
 // ********* LOOP **********
 void loop() {
 
+<<<<<<< HEAD
+  //    digitalWrite(pinMode1, HIGH);
+  //    delay(3000);
+  //    digitalWrite(pinMode1, LOW);
+  if (Serial.available() > 0) {
+    deserializeJson(recebeJson, Serial);       // RECEBE JSON DA PORTA USB
+
+    //Serial.println("Temperatura");
+    //delay(1000);
+    //funcaoTermopares();
+    
+        posX = recebeJson["xpos"];
+        posY = recebeJson["ypos"];
+        posZ = recebeJson["zpos"];
+        posR = recebeJson["rpos"];
+        tempo = recebeJson["tempo"];
+
+        strPosX = String(posX);
+        strPosY = String(posY);
+        strPosZ = String(posZ);
+        strPosR = String(posR);
+        intTempo = (int)tempo;
+
+        delay(1000);
+        Serial.println(posX);
+        Serial.println(posY);
+        Serial.println(posZ);
+        Serial.println(posR);
+        Serial.println(tempo);
+
+        
+    //
+//        giroMotor2("x", strPosX);
+//        giroMotor2("y", strPosY);
+//        giroMotor2("z", strPosZ);
+//        giroMotor2("r", strPosR);
+    //
+=======
   if (Serial.available()) {
     trataJson();
+>>>>>>> 5dc3acd78a2722c06000000609f3e2292e2d63ab
   }
 
   if (operacao.equals("mov"))
